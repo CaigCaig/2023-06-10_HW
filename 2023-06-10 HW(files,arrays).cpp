@@ -4,8 +4,6 @@
 #include <string>
 #include <cstdlib>
 
-class MyException {};
-
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -58,6 +56,11 @@ int main()
         }
         arr1[i] = tmp;
     }
+    tmp = arr1[0];
+    for (auto i = 0; i < size_arr1-1; i++) {
+        arr1[i] = arr1[i+1];
+    }
+    arr1[size_arr1 - 1] = tmp;
 
     fin >> s;
     if (s == "") {
@@ -96,18 +99,22 @@ int main()
         }
         arr2[i] = tmp;
     }
+    tmp = arr2[size_arr2 - 1];
+    for (auto i = size_arr2 - 1; i > 0; i--) {
+        arr2[i] = arr2[i - 1];
+    }
+    arr2[0] = tmp;
 
     std::ofstream fout{ "out.txt" };
 
     fout << size_arr2 << std::endl;
     for (auto i = 0; i < size_arr2; i++) {
-        fout << arr2[size_arr2 - i - 1] << ' ';
+        fout << arr2[i] << ' ';
     }
     fout << std::endl;
 
     fout << size_arr1 << std::endl;
-    for (auto i = 1; i < size_arr1; i++) {
+    for (auto i = 0; i < size_arr1; i++) {
         fout << arr1[i] << ' ';
     }
-    fout << arr1[0];
 }
